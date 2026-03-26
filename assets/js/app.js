@@ -73,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const grid = document.getElementById("templates-grid");
 const filterButtons = document.querySelectorAll(".filter-btn");
 
+if(!grid) return;
+
 renderTemplates("all");
 
 filterButtons.forEach(btn => {
@@ -95,7 +97,7 @@ grid.innerHTML = "";
 const filtered =
 category === "all"
 ? templatesData
-: templates.filter(t => t.category === category);
+: templatesData.filter(t => t.category === category);
 
 filtered.forEach(template => {
 
@@ -143,5 +145,28 @@ grid.appendChild(card);
 });
 
 }
+
+});
+
+// MOBILE MENU
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const menuToggle = document.querySelector(".mobile-menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if(!menuToggle || !navLinks) return;
+
+  // abrir / fechar menu
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("mobile-active");
+  });
+
+  // fechar menu ao clicar em um link
+  document.querySelectorAll(".nav-link").forEach(link=>{
+    link.addEventListener("click", ()=>{
+      navLinks.classList.remove("mobile-active");
+    });
+  });
 
 });
